@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="jp.co.mayekawa.mapper.MonthlyForecastCostMapper">
+	
+	<select id="selectMonthlyForecastCost" resultType="jp.co.mayekawa.entity.MonthlyForecastCost">
+SELECT
+    [製番] AS sibn
+    , [会計年月] AS kkiYymm
+    , [予実区分] AS yjtTyp
+    , [予実区分名] AS yjtTypNm
+    , [発生区分] AS hisTyp
+    , [発生区分名] AS hisTypnm
+    , [商品コード] AS itemCd
+    , [商品名] AS itemNm
+    , [HSコード] AS hsCd
+    , [HS名] AS hsNm
+    , [製造PL集計項目コード] AS sizPlSyuKumCd
+    , [製造PL集計項目名] AS sizPlSyuKumNm
+    , [通貨コード] AS tukaCd
+    , [レート] AS rate
+    , [数量] AS sry
+    , [単位コード] AS unitCd
+    , [単位名] AS unitNm
+    , [単価] AS tank
+    , [単価（邦貨）] AS tankHouk
+    , [金額] AS gak
+    , [伝票番号] AS dnpyNo
+    , [明細摘要] AS msiNote 
+FROM
+    [月次前予測原価ファンクション](#{sibn})
+ORDER BY
+    [発生区分]
+    , [商品コード]
+	</select>
+</mapper>
