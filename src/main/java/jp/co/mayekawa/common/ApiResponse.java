@@ -3,11 +3,9 @@ package jp.co.mayekawa.common;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.Data;
 
 /**
  * レスポンスクラス。
@@ -29,8 +27,8 @@ public class ApiResponse<T> {
     /** エラー時のメッセージリスト */
     private List<String> errors;
     /** 実行日時 */
-    @Builder.Default
-    private LocalDateTime timestamp = LocalDateTime.now().withNano(0);
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime timestamp;
 
     /**
      * コンストラクタ。
