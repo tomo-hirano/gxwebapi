@@ -1,6 +1,5 @@
 package jp.co.mayekawa.util;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,6 @@ public class ResponseHelper {
     @Autowired
     private ObjectMapper objectMapper;
 
-    /** APPLICATION_JSON_UTF8 */
-    private static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON,
-            StandardCharsets.UTF_8);
-
     /**
      * 成功時の出力処理。
      * 
@@ -43,7 +38,7 @@ public class ResponseHelper {
         JsonNode normalized = NullToEmptyJson.replaceNullWithEmptyString(tree);
 
         String json = objectMapper.writeValueAsString(normalized);
-        return ResponseEntity.ok().contentType(APPLICATION_JSON_UTF8).body(json);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(json);
     }
 
     /**
@@ -60,6 +55,6 @@ public class ResponseHelper {
         JsonNode normalized = NullToEmptyJson.replaceNullWithEmptyString(tree);
 
         String json = objectMapper.writeValueAsString(normalized);
-        return ResponseEntity.badRequest().contentType(APPLICATION_JSON_UTF8).body(json);
+        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(json);
     }
 }

@@ -3,7 +3,6 @@ package jp.co.mayekawa.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -27,12 +26,22 @@ import tools.jackson.core.JacksonException;
 public class MonthlyForecastCostController {
 
     /** 月次前予測原価ファンクション サービス */
-    @Autowired
-    private MonthlyForecastCostService monthlyForecastCostService;
+    private final MonthlyForecastCostService monthlyForecastCostService;
 
     /** レスポンスヘルパー */
-    @Autowired
-    private ResponseHelper responseHelper;
+    private final ResponseHelper responseHelper;
+
+    /**
+     * コンストラクタ。
+     * 
+     * @param monthlyForecastCostService 月次前予測原価ファンクションサービス
+     * @param responseHelper             スポンスヘルパー
+     */
+    public MonthlyForecastCostController(MonthlyForecastCostService monthlyForecastCostService,
+            ResponseHelper responseHelper) {
+        this.monthlyForecastCostService = monthlyForecastCostService;
+        this.responseHelper = responseHelper;
+    }
 
     /**
      * 月次前予測原価ファンクション検索処理。
