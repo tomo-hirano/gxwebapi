@@ -3,6 +3,8 @@ package jp.co.mayekawa.common;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 /**
@@ -22,6 +24,7 @@ public class ApiResponse<T> {
     /** エラー時のメッセージリスト */
     private List<String> errors;
     /** 実行日時 */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime timestamp;
 
     /**
