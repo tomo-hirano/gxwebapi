@@ -1,6 +1,5 @@
 package jp.co.mayekawa.util;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
