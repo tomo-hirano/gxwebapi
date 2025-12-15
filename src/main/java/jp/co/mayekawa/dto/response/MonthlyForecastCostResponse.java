@@ -2,18 +2,21 @@ package jp.co.mayekawa.dto.response;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import jp.co.mayekawa.entity.MonthlyForecastCost;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import tools.jackson.databind.annotation.JsonSerialize;
+import tools.jackson.databind.ser.std.ToStringSerializer;
 
 /**
  * 月次前予測原価ファンクションのレスポンスオブジェクト。
  */
-@Data
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MonthlyForecastCostResponse {
 
     /** 製番 */
@@ -94,29 +97,29 @@ public class MonthlyForecastCostResponse {
      * @return 月次前予測原価ファンクションのレスポンスオブジェクト
      */
     public static MonthlyForecastCostResponse fromEntity(MonthlyForecastCost monthlyForecastCost) {
-        MonthlyForecastCostResponse dto = new MonthlyForecastCostResponse();
-        dto.sibn = monthlyForecastCost.getSibn();
-        dto.kkiYymm = monthlyForecastCost.getKkiYymm();
-        dto.yjtTyp = monthlyForecastCost.getYjtTyp();
-        dto.yjtTypNm = monthlyForecastCost.getYjtTypNm();
-        dto.hisTyp = monthlyForecastCost.getHisTyp();
-        dto.hisTypnm = monthlyForecastCost.getHisTypnm();
-        dto.itemCd = monthlyForecastCost.getItemCd();
-        dto.itemNm = monthlyForecastCost.getItemNm();
-        dto.hsCd = monthlyForecastCost.getHsCd();
-        dto.hsNm = monthlyForecastCost.getHsNm();
-        dto.sizPlSyuKumCd = monthlyForecastCost.getSizPlSyuKumCd();
-        dto.sizPlSyuKumNm = monthlyForecastCost.getSizPlSyuKumNm();
-        dto.tukaCd = monthlyForecastCost.getTukaCd();
-        dto.rate = monthlyForecastCost.getRate();
-        dto.sry = monthlyForecastCost.getSry();
-        dto.unitCd = monthlyForecastCost.getUnitCd();
-        dto.unitNm = monthlyForecastCost.getUnitNm();
-        dto.tank = monthlyForecastCost.getTank();
-        dto.tankHouk = monthlyForecastCost.getTankHouk();
-        dto.gak = monthlyForecastCost.getGak();
-        dto.dnpyNo = monthlyForecastCost.getDnpyNo();
-        dto.msiNote = monthlyForecastCost.getMsiNote();
-        return dto;
+    	return MonthlyForecastCostResponse.builder()
+    			.sibn(monthlyForecastCost.getSibn())
+    			.kkiYymm(monthlyForecastCost.getKkiYymm())
+    			.yjtTyp(monthlyForecastCost.getYjtTyp())
+		        .yjtTypNm(monthlyForecastCost.getYjtTypNm())
+		        .hisTyp(monthlyForecastCost.getHisTyp())
+		        .hisTypnm(monthlyForecastCost.getHisTypnm())
+		        .itemCd(monthlyForecastCost.getItemCd())
+		        .itemNm(monthlyForecastCost.getItemNm())
+		        .hsCd(monthlyForecastCost.getHsCd())
+		        .hsNm(monthlyForecastCost.getHsNm())
+		        .sizPlSyuKumCd(monthlyForecastCost.getSizPlSyuKumCd())
+		        .sizPlSyuKumNm(monthlyForecastCost.getSizPlSyuKumNm())
+		        .tukaCd(monthlyForecastCost.getTukaCd())
+		        .rate(monthlyForecastCost.getRate())
+		        .sry(monthlyForecastCost.getSry())
+		        .unitCd(monthlyForecastCost.getUnitCd())
+		        .unitNm(monthlyForecastCost.getUnitNm())
+		        .tank(monthlyForecastCost.getTank())
+		        .tankHouk(monthlyForecastCost.getTankHouk())
+		        .gak(monthlyForecastCost.getGak())
+		        .dnpyNo(monthlyForecastCost.getDnpyNo())
+		        .msiNote(monthlyForecastCost.getMsiNote())
+		        .build();
     }
 }

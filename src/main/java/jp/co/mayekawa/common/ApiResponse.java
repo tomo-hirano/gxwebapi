@@ -3,14 +3,21 @@ package jp.co.mayekawa.common;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 /**
  * レスポンスクラス。
  * 
  * @param <T> レスポンスデータのクラス
  */
-@Data
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ApiResponse<T> {
 
     /** APIレスポンスステータス */
@@ -22,13 +29,22 @@ public class ApiResponse<T> {
     /** エラー時のメッセージリスト */
     private List<String> errors;
     /** 実行日時 */
-    private LocalDateTime timestamp;
+    @Builder.Default
+    private LocalDateTime timestamp = LocalDateTime.now().withNano(0);
 
     /**
      * コンストラクタ。
+     * 
+     * @param status APIレスポンスステータス
+     * @param message レスポンスのメッセージ
+     * @param data レスポンスデータ
+     * @param errors エラー時のメッセージリスト
      */
-    private ApiResponse() {
-        this.timestamp = LocalDateTime.now();
+    public ApiResponse(@NonNull String status, @NonNull String message, T data, List<String> errors) {
+        this.status = status;
+        this.message = message;
+        this.data = data;
+        this.errors = errors;
     }
 
     /**
@@ -38,13 +54,10 @@ public class ApiResponse<T> {
      * @param data レスポンスデータ
      * @return レスポンスオブジェクト
      */
-    public static <T> ApiResponse<T> success(T data) {
-        ApiResponse<T> response = new ApiResponse<>();
-        response.status = ApiResponseStatus.SUCCESS.getValue();
-        response.message = "正常に処理されました";
-        response.data = data;
-        return response;
-    }
+	public static <T> ApiResponse<T> success(T data) {
+		return ApiResponse.<T>builder().status(ApiResponseStatus.SUCCESS.getValue()).message("正常に処理されました").data(data)
+				.build();
+	}
 
     /**
      * 成功時のファクトリメソッド。
@@ -54,13 +67,10 @@ public class ApiResponse<T> {
      * @param data    レスポンスデータ
      * @return レスポンスオブジェクト
      */
-    public static <T> ApiResponse<T> success(String message, T data) {
-        ApiResponse<T> response = new ApiResponse<>();
-        response.status = ApiResponseStatus.SUCCESS.getValue();
-        response.message = message;
-        response.data = data;
-        return response;
-    }
+	public static <T> ApiResponse<T> success(String message, T data) {
+		return ApiResponse.<T>builder().status(ApiResponseStatus.SUCCESS.getValue()).message(message).data(data)
+				.build();
+	}
 
     /**
      * エラー時のファクトリメソッド。
@@ -69,12 +79,9 @@ public class ApiResponse<T> {
      * @param message レスポンス時のメッセージ
      * @return レスポンスオブジェクト
      */
-    public static <T> ApiResponse<T> error(String message) {
-        ApiResponse<T> response = new ApiResponse<>();
-        response.status = ApiResponseStatus.ERROR.getValue();
-        response.message = message;
-        return response;
-    }
+	public static <T> ApiResponse<T> error(String message) {
+		return ApiResponse.<T>builder().status(ApiResponseStatus.ERROR.getValue()).message(message).build();
+	}
 
     /**
      * エラー時のファクトリメソッド。
@@ -83,11 +90,8 @@ public class ApiResponse<T> {
      * @param errors エラーメッセージ
      * @return レスポンスオブジェクト
      */
-    public static <T> ApiResponse<T> validationError(List<String> errors) {
-        ApiResponse<T> response = new ApiResponse<>();
-        response.status = ApiResponseStatus.VALIDATION_ERROR.getValue();
-        response.message = "入力値に不正があります";
-        response.errors = errors;
-        return response;
-    }
+	public static <T> ApiResponse<T> validationError(List<String> errors) {
+		return ApiResponse.<T>builder().status(ApiResponseStatus.VALIDATION_ERROR.getValue()).message("入力値に不正があります")
+				.errors(errors).build();
+	}
 }
