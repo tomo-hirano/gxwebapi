@@ -8,11 +8,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jp.co.mayekawa.common.ApiResponse;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * レスポンスヘッダーヘルパー。
@@ -35,9 +34,9 @@ public class ResponseHelper {
      * @param message メッセージ内容
      * @param data    出力オブジェクト
      * @return レスポンスエンティティ
-     * @throws JsonProcessingException JSON出力時
+     * @throws JacksonException JSON出力時
      */
-    public <T> ResponseEntity<String> successWithNullToEmpty(String message, T data) throws JsonProcessingException {
+    public <T> ResponseEntity<String> successWithNullToEmpty(String message, T data) throws JacksonException {
         ApiResponse<T> response = ApiResponse.success(message, data);
 
         JsonNode tree = objectMapper.valueToTree(response);
@@ -52,9 +51,9 @@ public class ResponseHelper {
      * 
      * @param errors エラー内容
      * @return レスポンスエンティティ
-     * @throws JsonProcessingException JSON出力時
+     * @throws JacksonException JSON出力時
      */
-    public ResponseEntity<String> validationErrorWithNullToEmpty(List<String> errors) throws JsonProcessingException {
+    public ResponseEntity<String> validationErrorWithNullToEmpty(List<String> errors) throws JacksonException {
         ApiResponse<?> response = ApiResponse.validationError(errors);
 
         JsonNode tree = objectMapper.valueToTree(response);

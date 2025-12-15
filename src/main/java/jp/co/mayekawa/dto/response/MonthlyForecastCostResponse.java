@@ -2,12 +2,11 @@ package jp.co.mayekawa.dto.response;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import jp.co.mayekawa.entity.MonthlyForecastCost;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tools.jackson.databind.annotation.JsonSerialize;
+import tools.jackson.databind.ser.std.ToStringSerializer;
 
 /**
  * 月次前予測原価ファンクションのレスポンスオブジェクト。

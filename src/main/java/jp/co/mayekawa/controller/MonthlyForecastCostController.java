@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import jakarta.validation.Valid;
 import jp.co.mayekawa.dto.request.MonthlyForecastCostRequest;
 import jp.co.mayekawa.dto.response.MonthlyForecastCostResponse;
 import jp.co.mayekawa.service.MonthlyForecastCostService;
 import jp.co.mayekawa.util.ResponseHelper;
+import tools.jackson.core.JacksonException;
 
 /**
  * 月次前予測原価ファンクションを実行するためのコントローラ。
@@ -40,10 +39,11 @@ public class MonthlyForecastCostController {
      * 
      * @param sibn 製番
      * @return 検索結果
+     * @throws JacksonException JSON出力時
      */
     @PostMapping(path = "/search")
     public ResponseEntity<?> selectMonthlyForecastCost(@Valid @RequestBody MonthlyForecastCostRequest request,
-            BindingResult bindingResult) throws JsonProcessingException {
+            BindingResult bindingResult) throws JacksonException {
 
         if (bindingResult.hasErrors()) {
             List<String> errorMessages = bindingResult.getFieldErrors().stream().map(FieldError::getDefaultMessage)

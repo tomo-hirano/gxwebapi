@@ -15,36 +15,36 @@ import jp.co.mayekawa.mapper.MonthlyForecastCostMapper;
 @Service
 public class MonthlyForecastCostService {
 
-	private static final Logger log = LoggerFactory.getLogger(MonthlyForecastCostService.class);
+    private static final Logger log = LoggerFactory.getLogger(MonthlyForecastCostService.class);
 
-	/** 月次前予測原価ファンクションMapper */
-	private final MonthlyForecastCostMapper monthlyForecastCostMapper;
+    /** 月次前予測原価ファンクションMapper */
+    private final MonthlyForecastCostMapper monthlyForecastCostMapper;
 
-	/**
-	 * コンストラクタ。
-	 * 
-	 * @param monthlyForecastCostMapper 月次前予測原価ファンクションMapper
-	 */
-	public MonthlyForecastCostService(MonthlyForecastCostMapper monthlyForecastCostMapper) {
-		this.monthlyForecastCostMapper = monthlyForecastCostMapper;
-	}
+    /**
+     * コンストラクタ。
+     * 
+     * @param monthlyForecastCostMapper 月次前予測原価ファンクションMapper
+     */
+    public MonthlyForecastCostService(MonthlyForecastCostMapper monthlyForecastCostMapper) {
+        this.monthlyForecastCostMapper = monthlyForecastCostMapper;
+    }
 
-	/**
-	 * 月次前予測原価ファンクション検索処理。
-	 * 
-	 * @param sibn 製番（製品識別番号）
-	 * @return 検索結果リスト。該当データなしの場合は空リストを返す
-	 */
-	public List<MonthlyForecastCost> selectMonthlyForecastCost(String sibn) {
-		if (log.isDebugEnabled()) {
-			log.debug("月次予測原価検索開始 製番={}", sibn);
-		}
+    /**
+     * 月次前予測原価ファンクション検索処理。
+     * 
+     * @param sibn 製番（製品識別番号）
+     * @return 検索結果リスト。該当データなしの場合は空リストを返す
+     */
+    public List<MonthlyForecastCost> selectMonthlyForecastCost(String sibn) {
+        if (log.isDebugEnabled()) {
+            log.debug("月次予測原価検索開始 製番={}", sibn);
+        }
 
-		List<MonthlyForecastCost> result = monthlyForecastCostMapper.selectMonthlyForecastCost(sibn);
+        List<MonthlyForecastCost> result = monthlyForecastCostMapper.selectMonthlyForecastCost(sibn);
 
-		if (log.isDebugEnabled()) {
-			log.debug("月次予測原価検索完了 製番={} 件数={}", sibn, result.size());
-		}
-		return result;
-	}
+        if (log.isDebugEnabled()) {
+            log.debug("月次予測原価検索完了 製番={} 件数={}", sibn, result.size());
+        }
+        return result;
+    }
 }
