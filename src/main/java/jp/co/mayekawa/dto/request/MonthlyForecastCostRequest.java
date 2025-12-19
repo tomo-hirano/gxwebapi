@@ -1,6 +1,6 @@
 package jp.co.mayekawa.dto.request;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
@@ -10,6 +10,6 @@ import lombok.Data;
 public class MonthlyForecastCostRequest {
 
     /** 製番 */
-    @NotNull(message = "製番は必須です")
+    @NotBlank(message = "製番は必須です。")
     private String sibn;
 }

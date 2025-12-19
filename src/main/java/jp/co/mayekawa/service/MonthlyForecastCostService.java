@@ -15,6 +15,7 @@ import jp.co.mayekawa.mapper.MonthlyForecastCostMapper;
 @Service
 public class MonthlyForecastCostService {
 
+    /** Logger */
     private static final Logger log = LoggerFactory.getLogger(MonthlyForecastCostService.class);
 
     /** 月次前予測原価ファンクションMapper */

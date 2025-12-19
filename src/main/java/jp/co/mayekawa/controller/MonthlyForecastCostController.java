@@ -3,6 +3,8 @@ package jp.co.mayekawa.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,6 +26,9 @@ import tools.jackson.core.JacksonException;
 @RestController
 @RequestMapping("/monthly")
 public class MonthlyForecastCostController {
+
+    /** Logger */
+    private static final Logger log = LoggerFactory.getLogger(MonthlyForecastCostController.class);
 
     /** 月次前予測原価ファンクション サービス */
     private final MonthlyForecastCostService monthlyForecastCostService;
@@ -57,6 +62,9 @@ public class MonthlyForecastCostController {
         if (bindingResult.hasErrors()) {
             List<String> errorMessages = bindingResult.getFieldErrors().stream().map(FieldError::getDefaultMessage)
                     .collect(Collectors.toList());
+
+            // ログファイルに出力
+            log.error("Validation error: {}", errorMessages);
 
             // バリデーションエラーもNULL→空文字変換
             return responseHelper.validationErrorWithNullToEmpty(errorMessages);
